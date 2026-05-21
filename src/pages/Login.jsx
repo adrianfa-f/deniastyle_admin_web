@@ -28,7 +28,15 @@ const Login = () => {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-rose/20 to-beige/40 p-4">
       <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md">
         <h1 className="text-3xl font-bold text-center text-primary mb-6">
-          DeniaStyle Admin
+          <span
+            className="hidden sm:inline text-3xl font-bold bg-gradient-to-r from-denia-peach to-denia-peach-dark bg-clip-text"
+            style={{
+              fontFamily: "Parisienne, cursive",
+              letterSpacing: "2px",
+            }}
+          >
+            M & D Collection Admin
+          </span>
         </h1>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>

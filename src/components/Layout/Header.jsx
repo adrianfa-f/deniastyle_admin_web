@@ -17,7 +17,17 @@ const Header = ({ toggleSidebar }) => {
       >
         <Bars3Icon className="w-6 h-6" />
       </button>
-      <div className="text-xl font-bold text-primary">DeniaStyle Admin</div>
+      <div className="text-xl font-bold text-primary">
+        <span
+          className="hidden sm:inline text-3xl font-bold bg-gradient-to-r from-denia-peach to-denia-peach-dark bg-clip-text"
+          style={{
+            fontFamily: "Parisienne, cursive",
+            letterSpacing: "2px",
+          }}
+        >
+          M & D Collection Admin
+        </span>
+      </div>
       <div className="flex-1" />
       <button
         onClick={handleLogout}
