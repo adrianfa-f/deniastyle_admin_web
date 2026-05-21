@@ -8,13 +8,14 @@ import ProductList from "./pages/Inventory/ProductList";
 import ProductFormPage from "./pages/Inventory/ProductFormPage";
 import OrderList from "./pages/Orders/OrderList";
 import OrderDetail from "./pages/Orders/OrderDetail";
+import ReportsDashboard from "./pages/Reports/ReportsDashboard"; // ✅ agregado
 
 // Configuración global de React Query
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 5 * 60 * 1000, // 5 minutos sin considerar datos obsoletos
-      refetchOnWindowFocus: false, // evita refetch al volver a la pestaña
+      staleTime: 5 * 60 * 1000, // 5 minutos
+      refetchOnWindowFocus: false,
       retry: 1,
     },
   },
@@ -40,9 +41,11 @@ function App() {
             <Route path="products/:id/edit" element={<ProductFormPage />} />
             <Route path="orders" element={<OrderList />} />
             <Route path="orders/:id" element={<OrderDetail />} />
+            <Route path="reports" element={<ReportsDashboard />} />{" "}
+            {/* ✅ ruta de reportes */}
           </Route>
         </Routes>
-        {/* Opcional: solo en desarrollo */}
+        {/* Devtools solo en desarrollo */}
         {process.env.NODE_ENV === "development" && (
           <ReactQueryDevtools initialIsOpen={false} />
         )}
