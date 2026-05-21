@@ -3,31 +3,21 @@
 @tailwind utilities;
 
 @layer base {
-  body {
-    @apply bg-denia-rose font-sans text-gray-800;
-  }
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-semibold tracking-tight;
-  }
-}
-
-@layer base {
-  h1, h2, h3 {
-    font-family: 'Playfair Display', serif;
+  :root {
+    --color-rose: #f9c5d1;
+    --color-beige: #f5e6d3;
+    --color-primary: #e8a9b4;
+    --color-accent: #d9c2b0;
+    --color-darkText: #4a3b32;
   }
 }
 
-@layer components {
-  .container-custom {
-    @apply container mx-auto px-4 sm:px-6 lg:px-8;
-  }
-  .btn-primary {
-    @apply bg-denia-peach text-white px-6 py-3 rounded-full font-medium transition-all duration-300 hover:bg-denia-peach-dark hover:shadow-lg transform hover:-translate-y-0.5;
-  }
-  .btn-secondary {
-    @apply bg-denia-mint text-gray-800 px-6 py-3 rounded-full font-medium transition-all duration-300 hover:bg-denia-mint-dark hover:text-white hover:shadow-lg;
-  }
-  .input-modern {
-    @apply w-full rounded-lg border-gray-300 shadow-sm focus:border-denia-peach focus:ring focus:ring-denia-peach focus:ring-opacity-50;
-  }
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
+body {
+  overflow: hidden;
+}
+

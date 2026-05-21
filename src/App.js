@@ -1,38 +1,44 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import MainLayout from "./layouts/MainLayout";
-import Home from "./pages/Home";
-import ProductList from "./pages/ProductList";
-import ProductDetail from "./pages/ProductDetail";
-import Cart from "./pages/Cart";
-import Checkout from "./pages/Checkout";
-import About from "./pages/Static/About";
-import Contact from "./pages/Static/Contact";
-import Terms from "./pages/Static/Terms";
-import Privacy from "./pages/Static/Privacy";
-import Cookies from "./pages/Static/Cookies";
-import Returns from "./pages/Static/Returns";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import Layout from "./components/Layout/Layout";
+import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
+import ProductList from "./pages/Inventory/ProductList";
+import ProductFormPage from "./pages/Inventory/ProductFormPage";
+import OrderList from "./pages/Orders/OrderList";
+import OrderDetail from "./pages/Orders/OrderDetail";
+import ReportsDashboard from "./pages/Reports/ReportsDashboard";
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 5 * 60 * 1000, // 5 minutos sin considerar datos obsoletos
+      refetchOnWindowFocus: false, // evita refetch al volver a la pestaña
+      retry: 1,
+    },
+  },
+});
 
 function App() {
+  const token = localStorage.getItem("token");
+  if (!token) return <Login />;
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<MainLayout />}>
-          <Route index element={<Home />} />
-          <Route path="productos" element={<ProductList />} />
-          <Route path="producto/:id" element={<ProductDetail />} />
-          <Route path="carrito" element={<Cart />} />
-          <Route path="checkout" element={<Checkout />} />
-          <Route path="sobre-nosotros" element={<About />} />
-          <Route path="contacto" element={<Contact />} />
-          {/* Páginas legales */}
-          <Route path="terminos" element={<Terms />} />
-          <Route path="privacidad" element={<Privacy />} />
-          <Route path="cookies" element={<Cookies />} />
-          <Route path="devoluciones" element={<Returns />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Dashboard />} />
+            <Route path="products" element={<ProductList />} />
+            <Route path="products/new" element={<ProductFormPage />} />
+            <Route path="products/:id/edit" element={<ProductFormPage />} />
+            <Route path="orders" element={<OrderList />} />
+            <Route path="orders/:id" element={<OrderDetail />} />
+            <Route path="reports" element={<ReportsDashboard />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </QueryClientProvider>
   );
 }
-
 export default App;
